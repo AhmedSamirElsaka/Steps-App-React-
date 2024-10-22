@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import Steps from "./Steps";
+import Message from "./Message";
+import Button from "./Button";
+import "./index.css";
 function App() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleNext = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const handlePrevious = () => {
+    setCurrentStep(currentStep - 1);
+  };
+  // setSteps((s) => s + 1);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Steps currentStep={currentStep} />
+      <Message currentStep={currentStep} />
+      <div className="buttons">
+        <Button bgColor="#7950f2" textColor="#fff" onClick={handlePrevious}>
+          <span>👈</span> Previous
+        </Button>
+
+        <Button bgColor="#7950f2" textColor="#fff" onClick={handleNext}>
+          Next <span>👉</span>
+          <span>🤓</span>
+        </Button>
+      </div>
     </div>
   );
 }
